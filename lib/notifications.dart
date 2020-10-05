@@ -4,10 +4,10 @@ import 'package:geolocator/geolocator.dart';
 class Notification {
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
-  Future showNotificationWithoutSound(Position position) async {
+  Future showNotificationWithoutSound(String address) async {
     var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
         '1', 'fetchBackground', 'fetch location in background',
-        playSound: true, importance: Importance.max, priority: Priority.high);
+        playSound: false, importance: Importance.low, priority: Priority.high);
     var iOSPlatformChannelSpecifics =
         new IOSNotificationDetails(presentSound: false);
     var platformChannelSpecifics = NotificationDetails(
@@ -17,7 +17,7 @@ class Notification {
     await flutterLocalNotificationsPlugin.show(
       0,
       'Location fetched',
-      position.toString(),
+      address,
       platformChannelSpecifics,
       payload: '',
     );
